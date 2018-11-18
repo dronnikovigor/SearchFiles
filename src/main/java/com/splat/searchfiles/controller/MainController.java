@@ -1,18 +1,16 @@
 package com.splat.searchfiles.controller;
 
 import com.splat.searchfiles.presenter.MainPresenter;
-import com.splat.searchfiles.search.SearchFiles;
 import com.splat.searchfiles.view.MainView;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 public class MainController implements MainView {
-    MainPresenter presenter;
+    private MainPresenter presenter = new MainPresenter(this);
 
     @FXML
     private Button search_btn;
@@ -24,10 +22,6 @@ public class MainController implements MainView {
     private TextField text_field;
     @FXML
     private ProgressIndicator progress_ind;
-
-    public MainController() {
-        presenter = new MainPresenter(this);
-    }
 
     @FXML
     public void initialize() {
