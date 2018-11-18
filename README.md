@@ -1,0 +1,1 @@
+[ ![Codeship Status for dronnikovigor/SearchFiles](https://app.codeship.com/projects/bcb363d0-cd90-0136-332b-5a613bb869e1/status?branch=master)](https://app.codeship.com/projects/315559)

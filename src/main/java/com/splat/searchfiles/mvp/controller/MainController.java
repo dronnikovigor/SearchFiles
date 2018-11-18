@@ -1,9 +1,8 @@
-package com.splat.searchfiles.controller;
+package com.splat.searchfiles.mvp.controller;
 
-import com.splat.searchfiles.presenter.MainPresenter;
-import com.splat.searchfiles.view.MainView;
+import com.splat.searchfiles.mvp.presenter.MainPresenter;
+import com.splat.searchfiles.mvp.view.MainView;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -11,8 +10,6 @@ import javafx.scene.input.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class MainController implements MainView {
     private MainPresenter presenter = new MainPresenter(this);
@@ -25,8 +22,6 @@ public class MainController implements MainView {
     private TextField extensions_field;
     @FXML
     private TextField text_field;
-    @FXML
-    private TextArea file_view;
     @FXML
     private ProgressIndicator progress_ind;
     @FXML
@@ -72,8 +67,6 @@ public class MainController implements MainView {
                                     else
                                         break;
                                 }
-                                //file_view.setText(textBuilder.toString());
-
                                 final Tab tab = new Tab(name);
                                 TextArea textArea = new TextArea(textBuilder.toString());
                                 tab.setContent(textArea);

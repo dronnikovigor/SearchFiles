@@ -1,4 +1,4 @@
-package com.splat.searchfiles.view;
+package com.splat.searchfiles.mvp.view;
 
 import javafx.scene.control.TreeItem;
 

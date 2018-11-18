@@ -1,7 +1,7 @@
-package com.splat.searchfiles.presenter;
+package com.splat.searchfiles.mvp.presenter;
 
 import com.splat.searchfiles.search.SearchFiles;
-import com.splat.searchfiles.view.MainView;
+import com.splat.searchfiles.mvp.view.MainView;
 
 public class MainPresenter extends Thread {
     private MainView mainView;

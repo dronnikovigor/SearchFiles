@@ -18,7 +18,7 @@
 
 <SplitPane dividerPositions="0.5" minHeight="400.0" minWidth="500.0" prefHeight="400.0" prefWidth="800.0"
            xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.splat.searchfiles.controller.MainController">
+           fx:controller="com.splat.searchfiles.mvp.controller.MainController">
     <VBox maxHeight="1.7976931348623157E308" maxWidth="400.0" minHeight="400.0" minWidth="400.0">
         <children>
             <GridPane maxHeight="120.0">
