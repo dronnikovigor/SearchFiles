@@ -4,7 +4,6 @@ import javafx.scene.control.TreeItem;
 
 import java.io.*;
 import java.nio.file.*;
-import java.util.ArrayList;
 
 public class SearchFiles implements Runnable {
     private String path;
@@ -70,6 +69,4 @@ public class SearchFiles implements Runnable {
     private boolean fileContainsWord(String fileName, String text) throws IOException {
         return new String(Files.readAllBytes(Paths.get(fileName))).contains(text);
     }
-
-
 }
