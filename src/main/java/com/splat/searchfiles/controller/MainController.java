@@ -2,11 +2,10 @@ package com.splat.searchfiles.controller;
 
 import com.splat.searchfiles.presenter.MainPresenter;
 import com.splat.searchfiles.view.MainView;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 public class MainController implements MainView {
@@ -21,14 +20,19 @@ public class MainController implements MainView {
     @FXML
     private TextField text_field;
     @FXML
+    private TextArea file_view;
+    @FXML
     private ProgressIndicator progress_ind;
+    @FXML
+    private TreeView<String> res_tree_view;
 
     @FXML
     public void initialize() {
+        progress_ind.setVisible(false);
         search_btn.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                progress_ind.setProgress(0);
+                progress_ind.setVisible(true);
                 if (extensions_field.getText().isEmpty())
                     extensions_field.setText("log");
                 presenter.startSearch(path_field.getText(), extensions_field.getText(), text_field.getText());
@@ -39,7 +43,13 @@ public class MainController implements MainView {
     }
 
     @Override
-    public void setProgressBar(int value) {
-        progress_ind.setProgress(value);
+    public void setTreeView(final TreeItem<String> files) {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                res_tree_view.setRoot(files);
+                progress_ind.setVisible(false);
+            }
+        });
+
     }
 }

@@ -36,7 +36,7 @@ public class MainPresenter extends Thread {
                 try {
                     thread.join();
                     searchFlag = false;
-                    mainView.setProgressBar(100);
+                    mainView.setTreeView(searchFiles.getFiles());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
