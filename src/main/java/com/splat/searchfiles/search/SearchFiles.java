@@ -17,7 +17,7 @@ public class SearchFiles implements Runnable {
     }
 
     public void setExtensions(String extensions) {
-        this.extensions = extensions.split(", ");
+        this.extensions = extensions.replaceAll(" ", "").split(",");
     }
 
     public void setText(String text) {
