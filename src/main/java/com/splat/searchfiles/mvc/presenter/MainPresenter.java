@@ -1,12 +1,9 @@
 package com.splat.searchfiles.mvc.presenter;
 
+import com.splat.searchfiles.search.GetFile;
 import com.splat.searchfiles.search.SearchFiles;
 import com.splat.searchfiles.mvc.view.MainView;
 import javafx.scene.control.TreeItem;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class MainPresenter {
     private MainView mainView;
@@ -40,40 +37,15 @@ public class MainPresenter {
         }
     }
 
-    public void getFile(TreeItem<String> newItem, String extensions) {
+    public void getFile(TreeItem<String> newItem, String extensions, String text) {
         new Thread(() -> {
-            String name = newItem.getValue();
-            if (name.lastIndexOf('.') > 0) {
-                int lastIndex = name.lastIndexOf('.');
-                String str = name.substring(lastIndex);
-                for (String ext : extensions.replaceAll(" ", "").split(",")) {
-                    if (str.equals("." + ext)) {
-                        StringBuilder pathBuilder = new StringBuilder();
-                        for (TreeItem<String> item = newItem;
-                             item != null; item = item.getParent()) {
-
-                            pathBuilder.insert(0, item.getValue());
-                            pathBuilder.insert(0, "/");
-                        }
-                        String path = pathBuilder.deleteCharAt(0).toString();
-
-                        StringBuilder textBuilder = new StringBuilder();
-                        try (BufferedReader in = new BufferedReader(new FileReader(path))) {
-                            String line = in.readLine();
-                            while (true) {
-                                if (line != null) {
-                                    textBuilder.append(line);
-                                    if ((line = in.readLine()) != null)
-                                        textBuilder.append("\n");
-                                } else
-                                    break;
-                            }
-                            mainView.setNewTab(name, textBuilder.toString());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
+            GetFile file = new GetFile(newItem, extensions);
+            file.setText(text);
+            try {
+                mainView.setNewTab(newItem.getValue(), file.getAllLines(), file.getIndexes());
+            } catch (NullPointerException e) {
+                System.out.println("It's not a file!");
+                e.printStackTrace();
             }
         }).start();
     }

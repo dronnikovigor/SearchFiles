@@ -2,14 +2,17 @@ package com.splat.searchfiles.mvc.controller;
 
 import com.splat.searchfiles.mvc.presenter.MainPresenter;
 import com.splat.searchfiles.mvc.view.MainView;
+import com.splat.searchfiles.mvc.view.SearchingTab;
 import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 
 import java.io.File;
+import java.util.List;
 
 public class MainController implements MainView {
     private MainPresenter presenter = new MainPresenter(this);
@@ -61,7 +64,7 @@ public class MainController implements MainView {
         //
         res_tree_view.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && newValue != oldValue) {
-                presenter.getFile(newValue, extensions_field.getText());
+                presenter.getFile(newValue, extensions_field.getText(), text_field.getText());
             }
         });
     }
@@ -76,12 +79,10 @@ public class MainController implements MainView {
     }
 
     @Override
-    public void setNewTab(String name, String text) {
+    public void setNewTab(String name, ObservableList<String> textLines, List<Integer> indexes) {
         Platform.runLater(() -> {
-            final Tab tab = new Tab(name);
-            TextArea textArea = new TextArea(text);
-            textArea.setEditable(false);
-            tab.setContent(textArea);
+            SearchingTab tab = new SearchingTab(name, textLines, indexes);
+
             tab_view.getTabs().add(tab);
             tab_view.getSelectionModel().select(tab);
         });

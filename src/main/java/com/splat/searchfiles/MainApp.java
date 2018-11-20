@@ -19,6 +19,7 @@ public class MainApp extends Application {
         Parent root = (Parent) loader.load(getClass().getResourceAsStream(fxmlFile));
         stage.setTitle("Search in Files");
         stage.setScene(new Scene(root));
+        stage.getScene().getStylesheets().add(getClass().getResource("/fxml/styles.css").toExternalForm());
         stage.show();
     }
 }
