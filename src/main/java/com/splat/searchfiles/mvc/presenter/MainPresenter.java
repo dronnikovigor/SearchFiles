@@ -1,5 +1,6 @@
 package com.splat.searchfiles.mvc.presenter;
 
+import com.splat.searchfiles.Constants;
 import com.splat.searchfiles.search.GetFile;
 import com.splat.searchfiles.search.SearchFiles;
 import com.splat.searchfiles.mvc.view.MainView;
@@ -42,7 +43,7 @@ public class MainPresenter {
             GetFile file = new GetFile(newItem, extensions);
             file.setText(text);
             try {
-                mainView.setNewTab(newItem.getValue(), file.getAllLines(), file.getIndexes());
+                mainView.setNewTab(file, newItem.getValue(), file.getLines(0, Constants.LINES_TO_LOAD), file.getIndexes());
             } catch (NullPointerException e) {
                 System.out.println("It's not a file!");
                 e.printStackTrace();

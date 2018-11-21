@@ -3,6 +3,7 @@ package com.splat.searchfiles.mvc.controller;
 import com.splat.searchfiles.mvc.presenter.MainPresenter;
 import com.splat.searchfiles.mvc.view.MainView;
 import com.splat.searchfiles.mvc.view.SearchingTab;
+import com.splat.searchfiles.search.GetFile;
 import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.ObservableList;
@@ -79,9 +80,9 @@ public class MainController implements MainView {
     }
 
     @Override
-    public void setNewTab(String name, ObservableList<String> textLines, List<Integer> indexes) {
+    public void setNewTab(GetFile file, String name, ObservableList<String> textLines, List<Integer> indexes) {
         Platform.runLater(() -> {
-            SearchingTab tab = new SearchingTab(name, textLines, indexes);
+            SearchingTab tab = new SearchingTab(file, name, textLines, indexes);
 
             tab_view.getTabs().add(tab);
             tab_view.getSelectionModel().select(tab);
